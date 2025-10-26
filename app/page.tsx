@@ -1,19 +1,45 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
-import { Waves, Users, Calendar, Heart, MapPin, Mail, Phone, Instagram, Facebook, Twitter, ChevronDown } from 'lucide-react';
+import { Waves, Users, Calendar, Heart, MapPin, Mail, Phone, Instagram, Facebook, Twitter, ChevronDown, LucideIcon } from 'lucide-react';
+
+interface NavigationItem {
+  name: string;
+  id: string;
+}
+
+interface Event {
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  volunteers: number;
+}
+
+interface Stat {
+  label: string;
+  value: string;
+  icon: LucideIcon;
+}
+
+interface FormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  message: string;
+}
 
 export default function BeachCleanupCampaign() {
-  const [activeSection, setActiveSection] = useState('home');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({
+  const [activeSection, setActiveSection] = useState<string>('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
     phone: '',
     message: ''
   });
 
-  const navigation = [
+  const navigation: NavigationItem[] = [
     { name: 'Home', id: 'home' },
     { name: 'About', id: 'about' },
     { name: 'Events', id: 'events' },
@@ -22,7 +48,7 @@ export default function BeachCleanupCampaign() {
     { name: 'Contact', id: 'contact' }
   ];
 
-  const upcomingEvents = [
+  const upcomingEvents: Event[] = [
     {
       title: 'Sunset Beach Cleanup',
       date: 'November 15, 2025',
@@ -46,14 +72,14 @@ export default function BeachCleanupCampaign() {
     }
   ];
 
-  const stats = [
+  const stats: Stat[] = [
     { label: 'Relawan', value: '2,500+', icon: Users },
     { label: 'Pembersihan Pantai', value: '150+', icon: Calendar },
     { label: 'Ton dikumpulkan', value: '45+', icon: Waves },
     { label: 'Pantai dibersihkan', value: '30+', icon: MapPin }
   ];
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     setActiveSection(id);
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
@@ -62,14 +88,14 @@ export default function BeachCleanupCampaign() {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert('Thank you for your interest! Your application has been received.');
     setFormData({
@@ -80,7 +106,7 @@ export default function BeachCleanupCampaign() {
     });
   };
 
-  const Clock = ({ className }) => (
+  const Clock = ({ className }: { className?: string }) => (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
@@ -332,7 +358,7 @@ export default function BeachCleanupCampaign() {
                   name="message"
                   value={formData.message}
                   onChange={handleInputChange}
-                  rows="4"
+                  rows={4}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-200 outline-none transition resize-none"
                   placeholder=""
                 ></textarea>
@@ -368,8 +394,8 @@ export default function BeachCleanupCampaign() {
                 width="100%"
                 height="600"
                 frameBorder="0"
-                marginHeight="0"
-                marginWidth="0"
+                marginHeight={0}
+                marginWidth={0}
                 className="rounded-lg"
                 title="Survey Form"
               >
