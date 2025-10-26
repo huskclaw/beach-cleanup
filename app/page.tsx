@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from 'react';
 import { Waves, Users, Calendar, Heart, MapPin, Mail, Phone, Instagram, Facebook, Twitter, ChevronDown } from 'lucide-react';
 
